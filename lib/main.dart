@@ -6,9 +6,16 @@ import 'package:hive_with_bloc/model/marital_list.dart';
 import 'package:hive_with_bloc/repositories/auth_repositories.dart';
 import 'package:hive_with_bloc/screens/home_page.dart';
 import 'package:hive_with_bloc/services/auth_services.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Hydrated bloc for persist data.
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
   // Initialize hive database.
   await Hive.initFlutter();
   // Register the adapter for the FamilyStatus model.We have to register.
