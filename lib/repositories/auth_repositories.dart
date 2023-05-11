@@ -17,8 +17,7 @@ class AuthRepositories {
     // For Iterate value and store inside list.
     final listData = box.values.toList().cast<FamilyStatus>();
     if (listData.isNotEmpty) {
-      print("##############33 hive execute");
-      box.close();
+      print("##############----  hive execute");
       return listData;
     }
 

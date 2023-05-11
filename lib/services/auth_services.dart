@@ -10,7 +10,7 @@ class AuthServices {
     final box = await HiveDB().openFamilyStatusBox();
     try {
       print("############## API execute");
-      await Future.delayed(Duration(seconds: 4));
+      await Future.delayed(const Duration(seconds: 4));
       const url = 'http://54.90.99.24:8000/api/v1/getMaritalStatusList';
       final uri = Uri.parse(url);
       final response = await http.get(uri);
