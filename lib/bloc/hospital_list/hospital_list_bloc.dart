@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive_with_bloc/model/marital_list.dart';
 import 'package:hive_with_bloc/repositories/auth_repositories.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'hospital_list_event.dart';
 part 'hospital_list_state.dart';
 
-class HospitalListBloc extends Bloc<HospitalListEvent, HospitalListState> {
+class HospitalListBloc extends HydratedBloc<HospitalListEvent, HospitalListState> {
   final AuthRepositories authRepositories;
   HospitalListBloc({required this.authRepositories})
       : super(HospitalListState.intial()) {
@@ -24,5 +26,23 @@ class HospitalListBloc extends Bloc<HospitalListEvent, HospitalListState> {
         ));
       }
     });
+  }
+  
+  @override
+  HospitalListState fromJson(Map<String, dynamic> json) {
+    try {
+      return HospitalListState.fromJson(json);
+    } catch (_) {
+      return HospitalListState.intial();
+    }
+  }
+  
+  @override
+  Map<String, dynamic> toJson(HospitalListState state) {
+    try {
+      return state.toJson();
+    } catch (e) {
+      return {};
+    }
   }
 }

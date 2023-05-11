@@ -11,14 +11,14 @@ import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Hydrated bloc for persist data.
+  // Initialize Hydrated bloc for persist and restore the state.
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
   // Initialize hive database.
   await Hive.initFlutter();
-  // Register the adapter for the FamilyStatus model.We have to register.
+  // Register the adapter for the FamilyStatus model. We have to register this.
   Hive.registerAdapter(FamilyStatusAdapter());
   runApp(const MyApp());
 }

@@ -37,4 +37,27 @@ class HospitalListState extends Equatable {
       maritalListStatus: maritalListStatus ?? this.maritalListStatus,
     );
   }
+
+
+  static HospitalListState fromJson(Map<String, dynamic> json) {
+    final maritalList = (json['maritalList'] as List<dynamic>?)
+        ?.map((e) => FamilyStatus.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return HospitalListState(
+      maritalListStatus:
+          MaritalListStatus.values[json['maritalListStatus'] as int],
+      maritalList: maritalList as List,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    final jsonList = maritalList.map((e) => e.toJson()).toList();
+
+    return {
+      'maritalListStatus': maritalListStatus.index,
+      'maritalList': jsonList,
+    };
+  }
 }
